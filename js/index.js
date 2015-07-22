@@ -1,10 +1,6 @@
 /* jshint node: true, asi: true */
 'use strict'
 
-// data-id="1"
-
-// .data() instead of .attr()
-
 var $ = require('jquery');
 var template = require('./template.js')
 
@@ -43,8 +39,6 @@ $(function () {
 				})
 			})
 
-		// $('main').append($(this).parent())
-
 		getPermissions
 			.done(function (permissions) {
 				permissions.forEach(function (permission) {
@@ -80,13 +74,5 @@ $(function () {
 
 		return template.title(theData)
 	}
-
-	// function renderList(user) {
-	// 	var theData = {
-	// 		userName: renderName(user)
-	// 	}
-
-	// 	return template.list(theData)
-	// }
 
 })

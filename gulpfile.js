@@ -1,5 +1,7 @@
 'use strict';
 
+var jshintConfig  = require('./package').jshintConfig;
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var del = require('del');
@@ -9,14 +11,12 @@ var jshint = require('gulp-jshint');
 
 // Clean
 gulp.task('clean', function (cb) {
-  del('js/bundle.js', cb)
-})
+  del('dist/bundle.js', cb);
+});
 
-
-/* jshint asi: true, */
 gulp.task('lint', function() {
-  return gulp.src('./js/index.js')
-    .pipe(jshint())
+  return gulp.src(['./gulpfile.js', './js/*.js'])
+    .pipe(jshint(jshintConfig))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
@@ -31,15 +31,13 @@ var bundler = browserify({
 });
 
 bundler.transform(hbsfy);
-bundler.on('log', gutil.log); // output build logs to terminal
+bundler.on('log', gutil.log);
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean', 'lint'], function () {
   return bundler.bundle()
-    // log errors if they happen
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-    // set output filename
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('js'));
+    .pipe(gulp.dest('dist'));
 });
 
 // API Server
@@ -64,12 +62,12 @@ gulp.task('serve:web', serve({
   port: 8000
 }));
 
-gulp.task('serve', ['serve:api', 'serve:web'])
+gulp.task('serve', ['serve:api', 'serve:web']);
 
 // Watch
 gulp.task('watch', function () {
-  return gulp.watch(['./js/index.js'], ['build'])
-})
+  return gulp.watch(['./gulpfile.js', './js/*.js'], ['build']);
+});
 
 // Default
-gulp.task('default', ['lint', 'serve', 'watch'])
+gulp.task('default', ['serve', 'watch']);

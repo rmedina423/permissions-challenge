@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/rmedina423/permissions-challenge#readme",
   "dependencies": {
+    "handlebars": "^3.0.3",
+    "jquery": "^2.1.4",
+    "lodash": "^3.9.3"
+  },
+  "devDependencies": {
     "browserify": "^10.2.3",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
@@ -28,9 +33,7 @@
     "json-server": "^0.7.12",
     "vinyl-source-stream": "^1.1.0"
   },
-  "devDependencies": {
-    "handlebars": "^3.0.3",
-    "jquery": "^2.1.4",
-    "lodash": "^3.9.3"
+  "jshintConfig": {
+    "node": true
   }
 }

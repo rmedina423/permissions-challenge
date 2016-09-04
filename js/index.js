@@ -8,70 +8,66 @@ $(function () {
 	var getPermissions = $.get('http://localhost:3000/permissions');
 	var getNames = $.get('http://localhost:3000/users');
 
-	$('button').on('click', function (event) {
+	$('button').on('click', onButtonClick);
+	$('main').on('click', 'a', onAnchorClick);
+
+	function onButtonClick(event) {
 		event.preventDefault();
 
-		$('li').remove();
-		$('h3').remove();
+		$('ul li').remove();
+		$('h1').remove();
 
-		getNames
-			.done(function (users) {
-				users.forEach(function (user) {
-					$('main').append(renderName(user));
-				});
+		getNames.done(function (users) {
+			users.forEach(function (user) {
+				renderOntoList(renderName(user));
 			});
-	});
+		});
+	}
 
-	$('main').on('click', 'a', function (event) {
+	function onAnchorClick(event) {
 		event.preventDefault();
 
-		var id = $(this).parent().data('id');
+		var parentElement = event.currentTarget.parentElement;
+		var id = $(parentElement).data('id');
 
-		$('li').remove();
+		$('ul li').remove();
 
-		getNames
-			.done(function (users) {
-				users.forEach(function (user) {
-					if (id === user.id) {
-						$('button').after(renderTitle(user));
-					}
-				});
+		getNames.done(function (users) {
+			users.forEach(function (user) {
+				if (id === user.id) {
+					$('button').after(renderTitle(user));
+				}
 			});
+		});
 
-		getPermissions
-			.done(function (permissions) {
-				permissions.forEach(function (permission) {
-					if(id === permission.userId) {
-						$('main').append(renderPermissions(permission));
-					}				
-				});
+		getPermissions.done(function (permissions) {
+			permissions.forEach(function (permission) {
+				if(id === permission.userId) {
+					renderOntoList(renderPermissions(permission));
+				}				
 			});
+		});
+	}
 
-	});
+	function renderOntoList(listTemplate) {
+		$('ul').append(listTemplate);
+	}
 
 	function renderName(user) {
-
-		var theData = {
+		return template.userName({
 			user: user
-		};
-
-		return template.userName(theData);
+		});
 	}
 
 	function renderPermissions(permission) {
-		var theData = {
+		return template.permissions({
 			permission: permission
-		};
-
-		return template.permissions(theData);
+		});
 	}
 
 	function renderTitle(user) {
-		var theData = {
+		return template.title({
 			user: user
-		};
-
-		return template.title(theData);
+		});
 	}
-
 });

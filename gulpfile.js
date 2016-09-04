@@ -1,11 +1,10 @@
 'use strict';
 
-var jshintConfig  = require('./package').jshintConfig;
-
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var del = require('del');
 var jshint = require('gulp-jshint');
+var jshintConfig  = require('./package').jshintConfig;
 
 // Add your require statements and gulp tasks here
 

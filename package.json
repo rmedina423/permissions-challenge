@@ -24,7 +24,7 @@
   "devDependencies": {
     "browserify": "^10.2.3",
     "del": "^1.2.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-jshint": "^1.11.2",
     "gulp-serve": "^1.0.0",
     "gulp-util": "^3.0.5",

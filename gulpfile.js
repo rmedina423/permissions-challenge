@@ -66,7 +66,7 @@ gulp.task('serve', ['serve:api', 'serve:web']);
 
 // Watch
 gulp.task('watch', function () {
-  return gulp.watch(['./gulpfile.js', './js/*.js'], ['build']);
+  return gulp.watch(['./gulpfile.js', './js/*', './templates/*'], ['build']);
 });
 
 // Default

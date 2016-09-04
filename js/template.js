@@ -1,13 +1,9 @@
 'use strict';
 
-var Handlebars = require('hbsfy/runtime')
-
-var userName = require('./../templates/userName.handlebars');
-var permissions = require('./../templates/permissions.handlebars');
-var title = require('./../templates/title.handlebars');
+var Handlebars = require('hbsfy/runtime');
 
 module.exports = {
-	userName: userName,
-	permissions: permissions,
-	title: title,
+	userName: require('./../templates/userName.handlebars'),
+	permissions: require('./../templates/permissions.handlebars'),
+	title: require('./../templates/title.handlebars'),
 };
